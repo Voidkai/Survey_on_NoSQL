@@ -1,5 +1,7 @@
 # README
 
+[ppt](https://pages.netlify.fornever.org/database/nosql.html)
+
 ## Column Store
 
 1. compress
