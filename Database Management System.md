@@ -2,12 +2,12 @@
 
 ## I. Storage Hierarchy
 
-1. CPU Registers(  Faster Smaller Expensive)
+1. CPU Registers (Faster Smaller Expensive)
 2. CPU Caches
 3. DRAM
 4. SSD
 5. HDD
-6. Network Storage(slower bigger cheaper)
+6. Network Storage (slower bigger cheaper)
 
 from register to DRAM is Volatile:
 
@@ -45,8 +45,13 @@ It organized the files as a collection of pages
 
 A page is a fixed-size block of data.
 
-- It can contain tuples, meta-data, indexes, log records...
-- Most systems do not mix page types
+- It can contain
+  -  tuples
+  - meta-data
+  - indexes
+  - log records
+  - ...
+- Most systems do not mix page types ?
 - Some systems require a page to be self-contained.
 
 Each page is given a unique identifier: Page ID
@@ -59,7 +64,7 @@ Three different notions of pages:
 2. OS Pages 4KB
 3. Database Page (512B-16KB)
 
-#### 1.3 Database Heap
+#### 1.3 Database Heap ?
 
 : an unordered collection of pages, need meta-data to keep track of what pages exist and which have free space. And there are two ways to represent a heap file : **Linked list and Page Directory**.
 
@@ -83,7 +88,7 @@ The directory also records the number of free slots per page.
 
 Page Header includes :
 
-1. page size
+1. Page size
 2. Checksum
 3. DBMS Version
 4. Transaction Visibility
@@ -94,7 +99,7 @@ Page Header includes :
 Only storing tuples: There are two approaches:
 
 1. Tuple-oriented
-2. Log-structured
+2. Log-structured ?
 
 
 
@@ -117,7 +122,7 @@ Tuple includes header and attribute data.
 1. header contains meta-data about it
    1. Visibility info (concurrency control)
    2. Bit map for NULL values.
-2. We don't need to store meta-data about the schema.
+2. We **don't** store meta-data about the schema.
 
 
 
@@ -192,7 +197,7 @@ Disadvantages:
 1. Cantor DBMS 1970s
 2. DSM Proposal 1980s
 3. SybaseIQ (in memory only) 1990s
-4. Vertica, VectorWise, MonetDB 2000s
+4. **Vertica**, VectorWise, MonetDB 2000s
 5. Everyone 2010s
 
 
