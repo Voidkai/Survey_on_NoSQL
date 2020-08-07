@@ -73,9 +73,13 @@ The DBMS maintains special pages that tracks the location of data pages in the d
 
 The directory also records the number of free slots per page.
 
+#### 1.4 Log-structured File Organization
+
+
+
 ### 2. Page layout
 
-### 2.1 Page Header
+#### 2.1 Page Header
 
 Page Header includes :
 
@@ -85,7 +89,7 @@ Page Header includes :
 4. Transaction Visibility
 5. Compression Information
 
-### 2.2 Page Layout
+#### 2.2 Page Layout
 
 Only storing tuples: There are two approaches:
 
@@ -94,7 +98,7 @@ Only storing tuples: There are two approaches:
 
 
 
-#### Slotted Pages
+#### 2.3 Slotted Pages
 
 The most common layout scheme is called slotted pages,
 
@@ -116,6 +120,80 @@ Tuple includes header and attribute data.
 2. We don't need to store meta-data about the schema.
 
 
+
+### 4. Data Representation
+
+1. INTEGER BIGINT SMALLINT TINYINT
+   * C C++ Representation
+2. FLOAT REAL VS. NUMERIC DECIMAL
+   * IEEE 754 Standard Fixed-point Decimals
+3. VARCHAR VARBINARY TEXT BLOB
+4. TIME DATA TIMESTAMP
+
+
+
+### 5. Workload types
+
+#### 5.1 OLTP(On-line Transaction Processing)
+
+Simple queries that read or update a small amount of data that is related to a single entity in the database.
+
+This is usually the kind of application that people build first.
+
+
+
+#### 5.2 OLAP(On-line Analytical Processing)
+
+Complex queries that read large portions of the database spanning multiple entities.
+
+
+
+#### 5.3 HTAP(OLAP & OLTP)
+
+| OLTP        | HTAP     | OLAP      |
+| ----------- | -------- | --------- |
+| More writes | Moderate | More Read |
+| Simple      | Moderate | Complex   |
+
+
+
+### 6. Storage Models
+
+#### 6.1 n-ary storage model(aka "row storage")
+
+NSM: DBMS stores all attributes for a single tuple contiguously in a page.
+
+
+
+#### 6.2 Decomposition Storage Model(aka "column store")
+
+DBMS stores the values of a single attribute for all tuples contiguously in a page.
+
+##### tuple identification
+
+1. Fixed length offset: each value is the same length for an attribute
+2. Embedded tuple Ids: Each value is stored with its tuple id in a column
+
+
+
+Advantages:
+
+1. Reduces the amount wasted I/O because the DBMS only reads the data that it needs.
+2. Better query processing and data compression 
+
+Disadvantages:
+
+1. Slow for point queries, inserts, updates , and deletes because of tuple splitting/stitching.
+
+
+
+##### DSM system History:
+
+1. Cantor DBMS 1970s
+2. DSM Proposal 1980s
+3. SybaseIQ (in memory only) 1990s
+4. Vertica, VectorWise, MonetDB 2000s
+5. Everyone 2010s
 
 
 
